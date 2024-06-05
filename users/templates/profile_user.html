@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block Title %}
+  {{ user.name }} Profile
+{% endblock %}
+
+{% block content %}
+  <style>
+    /* Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+    /* Container Styles */
+    .profile-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 50px;
+      background-color: lightgray;
+      border-radius: 50px;
+      box-shadow: 0 5px 9px rgba(2, 022, 02, 02.1);
+      text-align: center;
+      font-family: 'Lobster:', cursive;
+    }
+
+    /* Heading Styles */
+    .profile-heading {
+      font-size: 60px;
+      margin-bottom: 20px;
+      color: darkgreen;
+    }
+
+    /* Details Styles */
+    .profile-details {
+      text-align: left;
+      font-size: 30px;
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+
+    /* Image Styles */
+    .profile-image {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      margin-bottom: 30px;
+    }
+    .profile-image {
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 5px solid black; /* Border color and thickness */
+  }
+
+    /* Button Styles */
+    .back-button {
+      display: inline-block;
+      padding: 10px 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+      font-style: inherit;
+      font-weight: bold;
+      font-size: 24px;
+      margin-top: 65px;
+    }
+
+    .back-button:hover {
+      background-color: darkgreen;
+    }
+
+    /* Table Styles */
+    .profile-table {
+      width: 100%;
+      margin-top: 50px;
+      border-collapse: collapse;
+    }
+
+    .profile-table th,
+    .profile-table td {
+      padding: 10px;
+      border: 1px solid black;
+      font-size: 24px;
+    }
+
+    .profile-table th {
+      padding: 10px;
+      background-color: whitesmoke;
+      color: #333;
+    }
+  </style>
+
+  <div class="profile-container">
+    <h1 class="profile-heading">{{ user.name }}</h1>
+    <img class="profile-image" src="{{ user.photo.url }}" alt="{{ user.name }} photo">
+    <p class="profile-details">Name of School : {{ user.school }}</p>
+    <p class="profile-details">Course : {{ user.course }}</p>
+    <p class="profile-details">Why do you like this Course? : </p>
+    <p class="profile-details">{{ user.bio }}</p>
+    <!-- Displaying likes and dislikes in a table -->
+    <table class="profile-table">
+      <tr>
+        <th width="200">Likes</th>
+        <th width="200">Dislikes</th>
+      </tr>
+      <tr>  
+        <td>{{ user.likes }}</td>
+        <td>{{ user.dislikes }}</td>
+      </tr>
+    </table>
+    <!-- End of table -->
+    <!-- Add more fields as needed -->
+    <!-- Back button -->
+    <div class="button-container">
+      <a href="{% url 'user_list' %}" class="back-button">BACK TO STUDENT LIST</a>
+    </div>
+  </div>
+{% endblock %}

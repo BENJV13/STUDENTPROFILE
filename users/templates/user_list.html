@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block Title %} Student Lists {% endblock %}
+{% block content %}
+<style>
+    .container {
+        width: 80%; /* Adjust the width as needed */
+        margin: 0 auto; /* Center the container horizontally */
+        background-color: grey; /* Light gray background */
+        padding: 20px;
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    }
+
+    .add-button-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .add-button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Button shadow */
+    }
+
+    .add-button:hover {
+        background-color: #45a049; /* Darker Green */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse; /* Collapse border spacing */
+        background-color: whitesmoke; /* Set background color */
+        border: 2px solid #ddd; /* Set table border color */
+    }
+
+    th, td {
+        padding: 12px; /* Increased padding */
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background-color: wheat;
+    }
+</style>
+</style>
+
+<div class="container">
+    <h1 style="text-align: center; margin-bottom: 20px;">STUDENT LISTS</h1>
+    <div class="add-button-container">
+        <button class="add-button" onclick="window.location.href='{% url 'create_user' %}'">CLICK HERE TO ADD PROFILE</button>
+    </div>
+    <table>
+        <tr>
+            {% if users.0.photo %} <!-- Check if the first user in the list has a photo -->
+                <th style="background-color: white;">Name</th>
+                <th style="background-color: white;">Actions</th>
+            {% endif %}
+        </tr>
+        {% for user in users %}
+            {% if user.photo %} <!-- Check if the user has a photo -->
+                <tr>
+                    <td style="font-weight: bold;">{{ user.name }}</td>
+                    <td>
+                        <button style="background-color: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; margin-right: 5px;" onclick="window.location.href='{% url 'profile_user' user.pk %}'">View Profile</button>
+                        <button style="background-color: #ffc107; color: black; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; margin-right: 5px;" onclick="window.location.href='{% url 'edit_user' user.pk %}'">Edit</button>
+                        <button style="background-color: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;" onclick="window.location.href='{% url 'delete_user' user.pk %}'">Delete</button>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
